@@ -1,0 +1,96 @@
+<mvc:View controllerName="first_app.controller.Index" 
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc" 
+	xmlns="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:l="sap.ui.layout">
+	<App id="app">
+		<pages>
+			<Page title="Your Quick Start application is ready!">
+				<content>
+					<Panel class="sapUiResponsiveMargin" width="auto">
+					<l:VerticalLayout width="100%">
+													<fb:FilterBar search="filterOrders" showRestoreOnFB="true" reset="clearFilterBar">
+														<fb:filterItems>
+															<fb:FilterItem name="OrderID" label="Order Id">
+																<fb:control>
+																	<Input id="orderID" type="Text"/>
+																</fb:control>	
+															</fb:FilterItem>
+															<fb:FilterItem name="CustomerID" label="Customer" >
+																<fb:control>
+																	<Select
+																	id="customerName"
+																	change="onSelectChange"
+																	forceSelection="false"
+																	items="{
+							                                                    path: '/Customers'
+							                                                 }">
+																	<core:Item key="{CustomerID}" text="{CompanyName}"/>
+																	</Select>
+																</fb:control>	
+															</fb:FilterItem>
+														</fb:filterItems>
+										    		</fb:FilterBar>		
+					</l:VerticalLayout>
+					<Table  id="orders" items="{path : '/Orders',
+													 parameters : {
+														'expand' : 'Customer,Employee'
+													 }}" growing="true">
+						<headerToolbar>
+							<OverflowToolbar>
+								<content>
+									<ToolbarSpacer/>
+												
+									<SearchField width="50%" search="searchByOrderId" liveChange="true"/>
+									<Button
+															id="sortUsersButton"
+															press="sortOrders"
+															tooltip="Sort"
+															icon="sap-icon://sort"/>
+									<Button press="exportToExcel" icon="sap-icon://download" tooltip="Eksport do excela"/>
+								</content>
+							</OverflowToolbar>
+						</headerToolbar>
+					
+					<columns>
+							<Column>
+								<Text text="Order"/>
+							</Column>
+							<Column>
+								<Text text="Customer"/>
+							</Column>
+							<Column>
+								<Text text="Employee"/>
+							</Column>
+							<Column>
+								<Text text="Order Date"/>
+							</Column>
+							<Column>
+								<Text text="Freight"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem press="displayOrder" type="Navigation"> 
+								<cells>
+									<ObjectIdentifier title="{OrderID}"/>
+									<ObjectAttribute text="{Customer/CompanyName}" active="true" press="displayCustomer"/>
+									<ObjectAttribute text="{Employee/TitleOfCourtesy} {Employee/FirstName} {Employee/LastName}" title="{Employee/Title}" active="true" press="displayEmployee"/>
+									<ObjectAttribute text="{path : 'OrderDate',
+															type : 'sap.ui.model.type.DateTime',
+															formatOptions : {
+																	style : 'medium'
+																		}}"/>
+									<ObjectNumber number="{path: 'Freight',
+														   formatter: '.formatter.parseFreight' }"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

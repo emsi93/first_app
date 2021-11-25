@@ -1,0 +1,66 @@
+<mvc:View xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="first_app.controller.OrderDetails">
+	<App id="app">
+		<pages>
+			<Page title="Your Quick Start application is ready!" busy="{view>/busy}" busyIndicatorDelay="{view>/delay}">
+				<content>
+					<Panel class="sapUiResponsiveMargin" width="auto">
+					<Table id="products" items="{Order_Details}" growing="true">
+						<columns>
+							<Column>
+								<Text text="ProductID"/>
+							</Column>
+							<Column>
+								<Text text="UnitPrice"/>
+							</Column>
+							<Column>
+								<Text text="Quantity"/>
+							</Column>
+							<Column>
+								<Text text="Discount"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<ObjectIdentifier title="{ProductID}"/>
+									<ObjectNumber number="{parts:[                 {path : 'UnitPrice'},                 {path : 'view>/currency'}                ],                type : 'sap.ui.model.type.Currency',                formatOptions:{                 showMeasure : true                  }                }"/>
+									<ObjectAttribute text="{Quantity}"/>
+									<ObjectAttribute text="{Discount}"/>
+							</ColumnListItem>
+						</items>
+					</Table>
+					
+					<Input width="100%" id="summaryPrice"  class="sapUiSmallMarginTop sapUiSmallMarginBottom" 
+													description="Summary Price" 
+													editable="false" 
+													fieldWidth="12%" 
+													textAlign="Right"
+													value="{parts:[ {path : 'view>/summaryPrice'},
+															{path : 'view>/currency'}               
+															],
+															type : 'sap.ui.model.type.Currency',
+															formatOptions:{                 
+															showMeasure : true } }"/>
+
+					<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding" selectedKey="{view>/selectedTab}">
+					<items>
+						<IconTabFilter id="tab1" icon="sap-icon://hint" tooltip="Order Details" text="Order Details" key="tab1">
+							<Text text="Order Details"/>
+						</IconTabFilter>
+						<IconTabFilter id="tab2" icon="sap-icon://customer" tooltip="Customer" text="Customer" key="tab2">
+							<Text text="Customer"/>
+						</IconTabFilter>
+						<IconTabFilter id="tab3" icon="sap-icon://employee" tooltip="Employee" text="Employee" key="tab3">
+							<Text text="Employee"/>
+						</IconTabFilter>
+						<IconTabFilter id="tab4" icon="sap-icon://shipping-status" tooltip="Delivery" text="Delivery" key="tab4">
+							<Text text="Delivery"/>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+				<content/>
+				</Panel>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

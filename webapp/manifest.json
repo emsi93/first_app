@@ -1,0 +1,131 @@
+{
+	"_version": "1.1.0",
+	"sap.app": {
+		"_version": "1.1.0",
+		"id": "first_app",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"title": "{{title}}",
+		"description": "{{appDescription}}",
+		"resources": "resources.json",
+		"ach": "ach",
+		"sourceTemplate": {
+			"id": "servicecatalog.connectivityComponent",
+			"version": "0.0.0"
+		},
+		"dataSources": {
+			"mainService": {
+				"uri": "https://services.odata.org/V2/Northwind/Northwind.svc/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "1.1.0",
+		"technology": "UI5",
+		"icons": {
+			"icon": "",
+			"favIcon": "",
+			"phone": "",
+			"phone@2": "",
+			"tablet": "",
+			"tablet@2": ""
+		},
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_hcb",
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "1.1.0",
+		"rootView": {
+			"viewName": "first_app.view.Index",
+			"type": "XML"
+		},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "first_app.i18n.i18n"
+				}
+			},
+			"": {
+				"dataSource": "mainService",
+				"preload": true
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "first_app.view",
+				"controlId": "app",
+				"controlAggregation": "pages",
+				"bypassed": {
+					"target": [
+						"notFound"
+					]
+				},
+				"async": true
+			},
+			"routes": [
+				{
+					"pattern": "",
+					"name": "orders",
+					"target": [
+						"orders"
+					]
+				},
+				{
+					"pattern": "orderDetails/{orderPath}",
+					"name": "orderDetails",
+					"target": [
+						"orderDetails"
+					]
+				}
+			],
+			"targets": {
+				"orders": {
+					"viewName": "Index",
+					"viewId": "orders",
+					"title": "Orders"
+				},
+				"orderDetails": {
+					"viewName": "OrderDetails",
+					"viewId": "orderDetails",
+					"title": "Order Details"
+				}
+			}
+		},
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		}
+	}
+}
