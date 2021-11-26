@@ -7,18 +7,18 @@
 	xmlns:l="sap.ui.layout">
 	<App id="app">
 		<pages>
-			<Page title="Your Quick Start application is ready!">
+			<Page title="{i18n>order.title}">
 				<content>
 					<Panel class="sapUiResponsiveMargin" width="auto">
 					<l:VerticalLayout width="100%">
 													<fb:FilterBar search="filterOrders" showRestoreOnFB="true" reset="clearFilterBar">
 														<fb:filterItems>
-															<fb:FilterItem name="OrderID" label="Order Id">
+															<fb:FilterItem name="OrderID" label="{i18n>order.orderID}">
 																<fb:control>
 																	<Input id="orderID" type="Text"/>
 																</fb:control>	
 															</fb:FilterItem>
-															<fb:FilterItem name="CustomerID" label="Customer" >
+															<fb:FilterItem name="CustomerID" label="{i18n>order.customerName}" >
 																<fb:control>
 																	<Select
 																	id="customerName"
@@ -47,28 +47,28 @@
 									<Button
 															id="sortUsersButton"
 															press="sortOrders"
-															tooltip="Sort"
+															tooltip="{i18n>order.sort}"
 															icon="sap-icon://sort"/>
-									<Button press="exportToExcel" icon="sap-icon://download" tooltip="Eksport do excela"/>
+									<Button press="exportToExcel" icon="sap-icon://download" tooltip="{i18n>order.export2excel}"/>
 								</content>
 							</OverflowToolbar>
 						</headerToolbar>
 					
 					<columns>
 							<Column>
-								<Text text="Order"/>
+								<Text text="{i18n>order.orderID}"/>
 							</Column>
 							<Column>
-								<Text text="Customer"/>
+								<Text text="{i18n>order.customerName}"/>
 							</Column>
 							<Column>
-								<Text text="Employee"/>
+								<Text text="{i18n>order.employeeName}"/>
 							</Column>
 							<Column>
-								<Text text="Order Date"/>
+								<Text text="{i18n>order.orderDate}"/>
 							</Column>
 							<Column>
-								<Text text="Freight"/>
+								<Text text="{i18n>order.freight}"/>
 							</Column>
 						</columns>
 						<items>
